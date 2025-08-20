@@ -32,7 +32,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git switch "@n8n/${{ inputs.old_version }}" --detach
+          git switch "n8n@${{ inputs.old_version }}" --detach
 
           BRANCH="patch/${{ inputs.version }}"
           git checkout -b $BRANCH
