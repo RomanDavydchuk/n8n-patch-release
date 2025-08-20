@@ -1,3 +1,4 @@
+// test
 const { pathsToModuleNameMapper } = require('ts-jest');
 const { compilerOptions } = require('get-tsconfig').getTsconfig().config;
 
