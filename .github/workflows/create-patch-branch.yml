@@ -1,0 +1,39 @@
+name: Cherry-pick and Create PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_shas:
+        description: 'Comma-separated commit SHAs'
+        required: true
+      version:
+        description: 'Patch version'
+        required: true
+        default: '1.0.0'
+
+jobs:
+  cherry-pick:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup and cherry-pick
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          BRANCH="patch/${{ inputs.version }}"
+          git checkout -b $BRANCH
+
+          IFS=',' read -ra SHAS <<< "${{ inputs.commit_shas }}"
+          for sha in "${SHAS[@]}"; do
+            git cherry-pick $(echo $sha | xargs)
+          done
+
+          git push origin $BRANCH
