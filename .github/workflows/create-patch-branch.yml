@@ -34,7 +34,7 @@ jobs:
 
           git switch "n8n@${{ inputs.old_version }}" --detach
 
-          BRANCH="patch/${{ inputs.version }}"
+          BRANCH="patch/${{ inputs.new_version }}"
           git checkout -b $BRANCH
 
           IFS=',' read -ra SHAS <<< "${{ inputs.commit_shas }}"
