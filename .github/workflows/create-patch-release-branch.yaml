@@ -27,6 +27,7 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup, cherry-pick and push branch
+        continue-on-error: true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
