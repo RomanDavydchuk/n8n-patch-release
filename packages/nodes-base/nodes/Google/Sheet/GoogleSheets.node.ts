@@ -13,7 +13,7 @@ export class GoogleSheets extends VersionedNodeType {
 			group: ['input', 'output'],
 			defaultVersion: 4.7,
 			subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-			description: 'Read, update and write data to Google Sheets',
+			description: 'Read, update and write data to Google Sheets (test)',
 		};
 
 		const nodeVersions: IVersionedNodeType['nodeVersions'] = {
