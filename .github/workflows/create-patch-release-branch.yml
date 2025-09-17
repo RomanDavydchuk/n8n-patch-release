@@ -51,7 +51,7 @@ jobs:
           IFS=',' read -ra SHAS <<< "${{ inputs.commit_shas }}"
           for sha in "${SHAS[@]}"; do
             sha=$(echo $sha | xargs)
-            if ! [[ git merge-base --is-ancestor $sha HEAD ]]; then
+            if ! git merge-base --is-ancestor $sha HEAD; then
               echo "Cherry-picking commit $sha"
               git cherry-pick $sha
             else
@@ -59,11 +59,11 @@ jobs:
             fi
           done
           git push origin $BRANCH
-      - name: Notify when cherry-pick is successful
+      - name: Notify if cherry-pick is successful
         if: ${{ success() }}
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{"success": true}' ${{ inputs.resumeUrl }}
-      - name: Notify when cherry-pick is not successful
+      - name: Notify if cherry-pick is not successful
         if: ${{ failure() }}
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{"success": false, "message": "There was a conflict when trying to create the branch, please do the cherry-pick and resolve the conflicts manually or do not include the PRs that caused the conflict"}' ${{ inputs.resumeUrl }}
