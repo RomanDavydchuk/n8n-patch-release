@@ -51,7 +51,7 @@ jobs:
           IFS=',' read -ra SHAS <<< "${{ inputs.commit_shas }}"
           for sha in "${SHAS[@]}"; do
             sha=$(echo $sha | xargs)
-            if ! [[ git merge-base --is-ancestor $sha HEAD; ]] then
+            if ! [[ git merge-base --is-ancestor $sha HEAD ]]; then
               echo "Cherry-picking commit $sha"
               git cherry-pick $sha
             else
