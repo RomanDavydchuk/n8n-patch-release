@@ -45,4 +45,4 @@ jobs:
       - name: Notify when cherry-pick is not successful
         if: ${{ failure() }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"success": false, "message": "There was a conflict when trying to create the branch, please do the cherry-pick and resolve the conflicts manually or don\'t include the PRs that caused the conflict"}' ${{ inputs.resumeUrl }}
+          curl -X POST -H "Content-Type: application/json" -d '{"success": false, "message": "There was a conflict when trying to create the branch, please do the cherry-pick and resolve the conflicts manually or do not include the PRs that caused the conflict"}' ${{ inputs.resumeUrl }}
