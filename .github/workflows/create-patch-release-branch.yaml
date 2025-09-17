@@ -27,7 +27,6 @@ jobs:
         with:
           fetch-depth: 0
       - name: Setup, cherry-pick and push branch
-        continue-on-error: true
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -39,6 +38,11 @@ jobs:
             git cherry-pick $(echo $sha | xargs)
           done
           git push origin $BRANCH
-      - name: Notify when done
+      - name: Notify when cherry-pick is successful
+        if: ${{ success() }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{"status": "completed", "message": "Workflow is finished!"}' ${{ inputs.resumeUrl }}
+          curl -X POST -H "Content-Type: application/json" -d '{"success": true}' ${{ inputs.resumeUrl }}
+      - name: Notify when cherry-pick is not successful
+        if: ${{ failure() }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{"success": false, "message": "There was a conflict when trying to create the branch, please do the cherry-pick and resolve the conflicts manually or don\'t include the PRs that caused the conflict"}' ${{ inputs.resumeUrl }}
