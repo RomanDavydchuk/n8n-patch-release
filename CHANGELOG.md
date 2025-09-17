@@ -1,3 +1,13 @@
+## [1.111.1](https://github.com/RomanDavydchuk/n8n-patch-release/compare/n8n@1.111.0...n8n@1.111.1) (2025-09-17)
+
+
+### Features
+
+* conflict ([#5](https://github.com/RomanDavydchuk/n8n-patch-release/issues/5)) ([2c14bd7](https://github.com/RomanDavydchuk/n8n-patch-release/commit/2c14bd779b593c0ece2c9bd16796e01abf61cc76))
+* test ([#2](https://github.com/RomanDavydchuk/n8n-patch-release/issues/2)) ([8592243](https://github.com/RomanDavydchuk/n8n-patch-release/commit/8592243e06d7283b89815bf07a8b77cfd20731ad))
+
+
+
 # [1.111.0](https://github.com/n8n-io/n8n/compare/n8n@1.110.0...n8n@1.111.0) (2025-09-08)
 
 
